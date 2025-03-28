@@ -1,0 +1,72 @@
+using System;
+
+namespace ConsoleApp2
+{
+    class QuickSort
+    {
+
+        static private int Partition2(int[] arr,int start, int end)
+        {
+            int pivot = arr[start];
+            int i = start;
+            int j = end;
+            while (i < j)
+            {
+                do { i++; } while(arr[i] < pivot);
+                do { j--; } while (arr[j] > pivot);
+
+                if(i < j)
+                    (arr[i], arr[j]) = (arr[j], arr[i]);
+            }
+
+            (arr[start], arr[j]) = (arr[j], arr[start]);
+            return j;
+        }
+        static private int Partition1(int[] arr, int start, int end)
+        {
+            int pivot = start;
+            int i = start;
+            int j = end;
+
+            while (true)
+            {
+                while (arr[pivot] <= arr[j] && pivot != j)
+                {
+                    j--;
+                }
+
+                if (pivot == j)
+                    break;
+                else if (arr[pivot] >= arr[j])
+                {
+                    (arr[pivot], arr[j]) = (arr[j], arr[pivot]);
+                    pivot = j;
+                }
+
+                while (arr[pivot] >= arr[i] && pivot != i)
+                {
+                    i++;
+                }
+
+                if (pivot == i)
+                    break;
+                else if (arr[pivot] < arr[i])
+                {
+                    (arr[pivot], arr[i]) = (arr[i], arr[pivot]);
+                    pivot = i;
+                }
+            }
+            return pivot;
+        }
+
+        static public void Sort(int[] arr, int l, int r)
+        {
+            if (l < r)
+            {
+                int piv = Partition1(arr, l, r);
+                Sort(arr, l, piv - 1);
+                Sort(arr, piv + 1, r);
+            }
+        }
+    }
+}
