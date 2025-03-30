@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp2
+{
+    class Search
+    {
+        
+      static  private int BS(int[] arr,int L,int R,int Element)
+        {
+            int m = L + (R - L) / 2;
+            if (arr[m] > Element)
+                return BS(arr, L, m - 1, Element);
+            else if (arr[m] < Element)
+                return BS(arr, m +1, R, Element);
+            else if(arr[m] == Element)
+                return m;
+            else
+                return -1;
+        }
+          
+       
+        static public int Binary(int[] arr,int Element)
+        {
+
+            Sort.QuickSort(arr);
+            return BS(arr, 0, arr.Length - 1, Element);
+        }
+    }
+}
